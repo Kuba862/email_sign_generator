@@ -2,7 +2,6 @@
   "name": "sign_app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://kuba862.github.io/email_sign_generator",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.3",
     "@testing-library/jest-dom": "^5.16.5",
