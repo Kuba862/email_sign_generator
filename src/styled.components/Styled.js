@@ -143,6 +143,9 @@ div {
         font-size: 1.05rem;
     }
 }
+&.hide {
+    display: none;
+}
 `
 export const CompanyDataForm = styled.form`
 margin-top: 50px;
@@ -165,6 +168,9 @@ div {
         font-size: 1.05rem;
     }
 }
+&.hide {
+    display: none;
+}
 `
 
 export const GoToGeneratorBtn = styled.button`
@@ -179,5 +185,8 @@ transition: .2s ease-in-out;
 cursor: pointer;
 &:hover {
     border-color: #000;
+}
+&.hide {
+    display: none;
 }
 `

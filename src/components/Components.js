@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
-import { addUserData } from '../redux/cartReducer';
+import { addUserData, addSocialData } from '../redux/cartReducer';
 import { HTML, HTML_VAR } from './HTML';
 import {
   SignatureGeneratorContainer,
@@ -10,7 +10,7 @@ import {
   Title,
   PersonalDataFormStyled,
   GoToGeneratorBtn,
-  CompanyDataForm
+  CompanyDataForm,
 } from '../styled.components/Styled';
 import CGO_LOGO from '../images/CG_signature_logo.png';
 import HO_LOGO from '../images/HO_signature_logo.png';
@@ -20,7 +20,7 @@ import LIBRES_LOGO from '../images/+LIBRES_CG_signature_logo.png';
 
 export const Header = () => <Title>EMAIL SIGNATURE GENERATOR</Title>;
 
-export const PersonalDataForm = () => {
+export const PersonalDataForm = ({ showLinks }) => {
   const [name, setName] = useState(null);
   const [possition, setPossition] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState(null);
@@ -42,13 +42,16 @@ export const PersonalDataForm = () => {
   };
 
   useEffect(() => {
-    setCorrectEmailDomain(/^[a-zA-Z0-9._%+-]+@(citizengo|hazteoir|maslibres|derechoavivir|votavalores)\.[a-zA-Z]{2,}$/i
-    .test(email))
-  }, [email])
+    setCorrectEmailDomain(
+      /^[a-zA-Z0-9._%+-]+@(citizengo|hazteoir|maslibres|derechoavivir|votavalores)\.[a-zA-Z]{2,}$/i.test(
+        email
+      )
+    );
+  }, [email]);
 
   return (
     <>
-      <PersonalDataFormStyled>
+      <PersonalDataFormStyled className={showLinks ? 'show' : 'hide'}>
         <InputData
           inputType="text"
           inputName="first and last name"
@@ -63,55 +66,92 @@ export const PersonalDataForm = () => {
           onChange={(e) => setPossition(e.target.value)}
           required={true}
         />
-          <InputData
-            inputType="text"
-            inputName="phone number"
-            placeholder="+48 111 222 333"
-            onChange={(e) => setPhoneNumber(e.target.value)}
-            required={true}
-          />
-          <InputData
-            inputType="email"
-            inputName="e-mail"
-            placeholder="jrejch@citizengo.net"
-            onChange={(e) => setEmail(e.target.value)}
-            required={true}
-          />
+        <InputData
+          inputType="text"
+          inputName="phone number"
+          placeholder="+48 111 222 333"
+          onChange={(e) => setPhoneNumber(e.target.value)}
+          required={true}
+        />
+        <InputData
+          inputType="email"
+          inputName="e-mail"
+          placeholder="jrejch@citizengo.net"
+          onChange={(e) => setEmail(e.target.value)}
+          required={true}
+        />
       </PersonalDataFormStyled>
       <GoToGeneratorBtn
-          onClick={async () => {
-            if (!name || !possition || !phoneNumber || !email) {
-              alert('fill form');
-            }
-            else if(correctEmailDomain) {
-              saveUserData();
-              navigate('/sign-generator');
-            }
-            else if (!correctEmailDomain) {
-              alert('Wrong email domain!')
-            }
-          }}
-        >
-          Create a singature
-        </GoToGeneratorBtn>
+        className={showLinks ? 'show' : 'hide'}
+        onClick={() => {
+          if (!name || !possition || !phoneNumber || !email) {
+            alert('fill form');
+          } else if (correctEmailDomain) {
+            saveUserData();
+            navigate('/sign-generator');
+          } else if (!correctEmailDomain) {
+            alert('Wrong email domain!');
+          }
+        }}
+      >
+        Create a singature
+      </GoToGeneratorBtn>
     </>
   );
 };
 
-export const LinksDataForm = () => {
+export const LinksDataForm = ({ showLinks }) => {
+  const [web, setWeb] = useState('');
+  const [fb, setFb] = useState('');
+  const [tw, setTw] = useState('');
+  const [ld, setLd] = useState('');
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const saveSocialUrls = () => {
+    dispatch(
+      addSocialData({
+        web: web,
+        fb: fb,
+        tw: tw,
+        ld: ld,
+      })
+    );
+  };
+
   return (
     <>
-    <CompanyDataForm>
-      <InputData
-        inputType="text"
-        inputName="website-url"
-        placeholder="website url"
-      />
-      <InputData inputType="text" inputName="facebook" placeholder="Facebook" />
-      <InputData inputType="text" inputName="twitter" placeholder="Twitter" />
-      <InputData inputType="text" inputName="linkedin" placeholder="Linkedin" />
+      <CompanyDataForm className={showLinks ? 'hide' : 'show'}>
+        <InputData
+          inputType="text"
+          inputName="website-url"
+          placeholder="website url"
+          onChange={(e) => setWeb(e.target.value)}
+          onBlur={saveSocialUrls}
+        />
+        <InputData
+          onChange={(e) => setFb(e.target.value)}
+          onBlur={saveSocialUrls}
+          inputType="text"
+          inputName="facebook"
+          placeholder="Facebook"
+        />
+        <InputData
+          onChange={(e) => setTw(e.target.value)}
+          onBlur={saveSocialUrls}
+          inputType="text"
+          inputName="twitter"
+          placeholder="Twitter"
+        />
+        <InputData
+          onChange={(e) => setLd(e.target.value)}
+          onBlur={saveSocialUrls}
+          inputType="text"
+          inputName="linkedin"
+          placeholder="Linkedin"
+        />
       </CompanyDataForm>
-      <GoToGeneratorBtn>Create a singature</GoToGeneratorBtn>
     </>
   );
 };
@@ -121,6 +161,7 @@ export const InputData = ({
   inputType,
   placeholder,
   onChange,
+  onBlur,
   required,
 }) => {
   return (
@@ -131,6 +172,7 @@ export const InputData = ({
         name={inputName}
         placeholder={placeholder}
         onChange={onChange}
+        onBlur={onBlur}
         required={required}
       />
     </div>
@@ -140,6 +182,12 @@ export const InputData = ({
 // signature generator
 
 export const SignatureGenerator = () => {
+
+  // const web = useSelector((state) => state.social.web);
+  // const fb = useSelector((state) => state.social.fb);
+  // const tw = useSelector((state) => state.social.tw);
+  // const ld = useSelector((state) => state.social.ld);
+
   const [showHTML, setShowHTML] = useState(false);
   const [textCp, setTextCp] = useState(false);
   const [socialUrls, setSocialUrls] = useState({
@@ -228,8 +276,8 @@ export const SignatureGenerator = () => {
   useEffect(() => {
     if (textCp) {
       setTimeout(() => {
-        setTextCp(false)
-      }, 3000)
+        setTextCp(false);
+      }, 3000);
     }
   }, [textCp]);
 

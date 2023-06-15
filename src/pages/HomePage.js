@@ -11,7 +11,8 @@ const HomePage = () => {
         <button className={showLinks ? 'active' : ''} onClick={() => setLinks(true)}>Personal Data</button>
         <button className={showLinks ? '' : 'active'} onClick={() => setLinks(false)}>Company Data</button>
       </FormSelection>
-      {showLinks ? <PersonalDataForm /> : <LinksDataForm />}
+      <PersonalDataForm showLinks={showLinks} />
+      <LinksDataForm showLinks={showLinks} />
     </>
   );
 };

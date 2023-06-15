@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    user: []
+    user: [],
+    social: []
 };
 
 export const cartSlice = createSlice({
@@ -14,12 +15,18 @@ export const cartSlice = createSlice({
             state.phoneNumber = action.payload.phoneNumber
             state.email = action.payload.email
         },
+        addSocialData: (state, action) => {
+            state.web = action.payload.web
+            state.fb = action.payload.fb
+            state.tw = action.payload.tw
+            state.ld = action.payload.ld
+        },
         clearUserData: (state) => {
             state.reduxState = {}
         }
     },
 });
 
-export const { addUserData, clearUserData } = cartSlice.actions;
+export const { addUserData, clearUserData, addSocialData } = cartSlice.actions;
 
 export default cartSlice.reducer;
