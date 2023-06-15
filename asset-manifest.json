@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.js": "/static/js/main.ef193f27.js",
+    "static/media/DAV_signature_logo.png": "/static/media/DAV_signature_logo.24dbf63cf91ceff4ed98.png",
+    "static/media/+LIBRES_CG_signature_logo.png": "/static/media/+LIBRES_CG_signature_logo.cbeac4826042485803b9.png",
+    "static/media/HO_signature_logo.png": "/static/media/HO_signature_logo.33141272c2b7a0830e55.png",
+    "static/media/CG_signature_logo.png": "/static/media/CG_signature_logo.5277e57dbc03ae83402d.png",
+    "static/media/VOTA_VALORES_signature_logo.png": "/static/media/VOTA_VALORES_signature_logo.1b0d3e5a0107e0ae2a1b.png",
+    "index.html": "/index.html",
+    "main.ef193f27.js.map": "/static/js/main.ef193f27.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.ef193f27.js"
+  ]
+}
