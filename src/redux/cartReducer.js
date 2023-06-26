@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     user: [],
-    social: []
+    social: [],
 };
 
 export const cartSlice = createSlice({
@@ -22,9 +22,9 @@ export const cartSlice = createSlice({
             state.ld = action.payload.ld
         },
         clearUserData: (state) => {
-            state.reduxState = {}
+            return initialState;
         }
-    },
+    }
 });
 
 export const { addUserData, clearUserData, addSocialData } = cartSlice.actions;

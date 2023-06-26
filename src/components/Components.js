@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
-import { addUserData, addSocialData } from '../redux/cartReducer';
+import {
+  addUserData,
+  addSocialData,
+  clearUserData,
+} from '../redux/cartReducer';
 import { HTML, HTML_VAR } from './HTML';
 import {
   SignatureGeneratorContainer,
@@ -17,141 +21,170 @@ import HO_LOGO from '../images/HO_signature_logo.png';
 import DAV_LOGO from '../images/DAV_signature_logo.png';
 import VOTA_LOGO from '../images/VOTA_VALORES_signature_logo.png';
 import LIBRES_LOGO from '../images/+LIBRES_CG_signature_logo.png';
+import { FormSelection } from '../styled.components/Styled';
 
 export const Header = () => <Title>EMAIL SIGNATURE GENERATOR</Title>;
 
-export const PersonalDataForm = ({ showLinks }) => {
-  const [name, setName] = useState(null);
-  const [possition, setPossition] = useState(null);
-  const [phoneNumber, setPhoneNumber] = useState(null);
-  const [email, setEmail] = useState(null);
-  const [correctEmailDomain, setCorrectEmailDomain] = useState(false);
-
-  const navigate = useNavigate();
+export const PersonalDataForm = () => {
   const dispatch = useDispatch();
-
+ 
   const saveUserData = () => {
     dispatch(
       addUserData({
-        name: name,
-        possition: possition,
-        phoneNumber: phoneNumber,
-        email: email,
+        name: personalData.name,
+        possition: personalData.possition,
+        phoneNumber: personalData.phone,
+        email: personalData.email
       })
-    );
-  };
+    )
+  }
+
+  const saveSocialData = () => {
+    dispatch(
+      addSocialData({
+        web: socialData.web,
+        fb: socialData.fb,
+        tw: socialData.tw,
+        ld: socialData.ld
+      })
+    )
+  }
+
+  const [correctEmailDomain, setCorrectEmailDomain] = useState(false);
+  const [showCompanyData, setShowCompanyData] = useState(false);
+
+  const [personalData, setPersonalData] = useState({
+    name: useSelector((state) => state.cart.name) || "",
+    possition: useSelector((state) => state.cart.position) || "",
+    phone: useSelector((state) => state.cart.phoneNumber) || "",
+    email: useSelector((state) => state.cart.email) || "",
+  });
+  const [socialData, setSocialData] = useState({
+    fb: 'https://www.facebook.com/citizengo',
+    tw: 'https://twitter.com/citizengo',
+    ld: 'https://www.linkedin.com/company/citizengo/',
+    web: 'https://citizengo.org/',
+  });
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     setCorrectEmailDomain(
       /^[a-zA-Z0-9._%+-]+@(citizengo|hazteoir|maslibres|derechoavivir|votavalores)\.[a-zA-Z]{2,}$/i.test(
-        email
+        personalData.email
       )
     );
-  }, [email]);
+  }, [personalData.email]);
 
   return (
     <>
-      <PersonalDataFormStyled className={showLinks ? 'show' : 'hide'}>
-        <InputData
-          inputType="text"
-          inputName="first and last name"
-          placeholder="Jakub Rejch"
-          onChange={(e) => setName(e.target.value)}
-          required={true}
-        />
-        <InputData
-          inputType="text"
-          inputName="position"
-          placeholder="Software Engineer"
-          onChange={(e) => setPossition(e.target.value)}
-          required={true}
-        />
-        <InputData
-          inputType="text"
-          inputName="phone number"
-          placeholder="+48 111 222 333"
-          onChange={(e) => setPhoneNumber(e.target.value)}
-          required={true}
-        />
-        <InputData
-          inputType="email"
-          inputName="e-mail"
-          placeholder="jrejch@citizengo.net"
-          onChange={(e) => setEmail(e.target.value)}
-          required={true}
-        />
-      </PersonalDataFormStyled>
-      <GoToGeneratorBtn
-        className={showLinks ? 'show' : 'hide'}
-        onClick={() => {
-          if (!name || !possition || !phoneNumber || !email) {
-            alert('fill form');
-          } else if (correctEmailDomain) {
+      <FormSelection>
+        <button
+          onClick={() => {
+            setShowCompanyData(false);
+            saveSocialData();
+          }}
+        >
+          Personal Data
+        </button>
+        <button
+          onClick={() => {
+            setShowCompanyData(true);
             saveUserData();
+          }}
+        >
+          Company Data
+        </button>
+        </FormSelection>
+        {showCompanyData ? (
+          <CompanyDataForm>
+            <InputData
+              inputType="text"
+              inputName="website-url"
+              placeholder={socialData.web}
+              value={socialData.web}
+              onChange={(e) => setSocialData({ ...socialData, web: e.target.value })}
+            />
+            <InputData
+              inputType="text"
+              inputName="facebook"
+              placeholder={socialData.fb}
+              value={socialData.fb}
+              onChange={(e) => setSocialData({ ...socialData, fb: e.target.value })}
+            />
+            <InputData
+              inputType="text"
+              inputName="twitter"
+              placeholder={socialData.tw}
+              value={socialData.tw}
+              onChange={(e) => setSocialData({ ...socialData, tw: e.target.value })}
+            />
+            <InputData
+              inputType="text"
+              inputName="linkedin"
+              placeholder={socialData.ld}
+              value={socialData.ld}
+              onChange={(e) => setSocialData({ ...socialData, ld: e.target.value })}
+            />
+          </CompanyDataForm>
+        ) : (
+          <PersonalDataFormStyled>
+            <InputData
+              inputType="text"
+              inputName="first and last name"
+              placeholder={personalData.name || "Jon Doe"}
+              required={true}
+              value={personalData.name}
+              onChange={(e) => setPersonalData({ ...personalData, name: e.target.value })}
+            />
+            <InputData
+              inputType="text"
+              inputName="position"
+              placeholder={personalData.possition || "SOFTWARE ENGINEER"}
+              value={personalData.possition}
+              required={true}
+              onChange={(e) => setPersonalData({ ...personalData, possition: e.target.value })}
+            />
+            <InputData
+              inputType="text"
+              inputName="phone number"
+              placeholder={personalData.phone || "+48 111 222 333"}
+              required={true}
+              value={personalData.phone}
+              onChange={(e) => setPersonalData({ ...personalData, phone: e.target.value })}
+            />
+            <InputData
+              inputType="email"
+              inputName="e-mail"
+              placeholder={personalData.email || "example@citizengo.org"}
+              required={true}
+              value={personalData.email}
+              onChange={(e) => setPersonalData({ ...personalData, email: e.target.value })}
+            />
+          </PersonalDataFormStyled>
+        )}
+      <GoToGeneratorBtn
+        onClick={() => {
+          if(!personalData.name || !personalData.possition || !personalData.email || !personalData.phone) {
+            alert('fill the form')
+          }
+          else if (correctEmailDomain) {
+            saveUserData();
+            saveSocialData();
             navigate('/sign-generator');
           } else if (!correctEmailDomain) {
             alert('Wrong email domain!');
           }
         }}
       >
-        Create a singature
+        Create a signature
       </GoToGeneratorBtn>
-    </>
-  );
-};
-
-export const LinksDataForm = ({ showLinks }) => {
-  const [web, setWeb] = useState('');
-  const [fb, setFb] = useState('');
-  const [tw, setTw] = useState('');
-  const [ld, setLd] = useState('');
-
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const saveSocialUrls = () => {
-    dispatch(
-      addSocialData({
-        web: web,
-        fb: fb,
-        tw: tw,
-        ld: ld,
-      })
-    );
-  };
-
-  return (
-    <>
-      <CompanyDataForm className={showLinks ? 'hide' : 'show'}>
-        <InputData
-          inputType="text"
-          inputName="website-url"
-          placeholder="website url"
-          onChange={(e) => setWeb(e.target.value)}
-          onBlur={saveSocialUrls}
-        />
-        <InputData
-          onChange={(e) => setFb(e.target.value)}
-          onBlur={saveSocialUrls}
-          inputType="text"
-          inputName="facebook"
-          placeholder="Facebook"
-        />
-        <InputData
-          onChange={(e) => setTw(e.target.value)}
-          onBlur={saveSocialUrls}
-          inputType="text"
-          inputName="twitter"
-          placeholder="Twitter"
-        />
-        <InputData
-          onChange={(e) => setLd(e.target.value)}
-          onBlur={saveSocialUrls}
-          inputType="text"
-          inputName="linkedin"
-          placeholder="Linkedin"
-        />
-      </CompanyDataForm>
+      <GoToGeneratorBtn onClick={() => {
+        dispatch(clearUserData());
+        window.location.reload();
+      }} >
+        clear all data
+      </GoToGeneratorBtn>
     </>
   );
 };
@@ -182,11 +215,6 @@ export const InputData = ({
 // signature generator
 
 export const SignatureGenerator = () => {
-
-  // const web = useSelector((state) => state.social.web);
-  // const fb = useSelector((state) => state.social.fb);
-  // const tw = useSelector((state) => state.social.tw);
-  // const ld = useSelector((state) => state.social.ld);
 
   const [showHTML, setShowHTML] = useState(false);
   const [textCp, setTextCp] = useState(false);
