@@ -135,13 +135,13 @@ export const HTML = ({
                                   <tr> 
                                     <td align="left" style="font-size:0;padding:10px 25px;padding-top:0;padding-bottom:3px;padding-left:15px;word-break:break-word"> 
                                       <div style="font-family:Arial;font-size:11px;line-height:1;text-align:left;color:#4185f5"> 
-                                        <a class="bluetext" href="https://www.facebook.com/${fbCompanyName}" target="_blank">
+                                        <a class="bluetext" href="${fbCompanyName}" target="_blank">
                                           <img width="20px" src="${facebookLogo}" style="padding-right:8px">
                                         </a>
-                                        <a class="bluetext" href="https://twitter.com/${twCompanyName}" target="_blank">
+                                        <a class="bluetext" href="${twCompanyName}" target="_blank">
                                           <img width="20px" src="${twitterLogo}" style="padding-right:8px">
                                         </a>
-                                        <a class="bluetext" href="https://www.linkedin.com/${ldCompanyName}" target="_blank">
+                                        <a class="bluetext" href="${ldCompanyName}" target="_blank">
                                           <img width="20px" src="${linkedinLogo}" style="padding-right:8px">
                                         </a>
                                       </div>
@@ -303,13 +303,13 @@ export const HTML_VAR = (logo,
                               <tr> 
                                 <td align="left" style="font-size:0;padding:10px 25px;padding-top:0;padding-bottom:3px;padding-left:15px;word-break:break-word"> 
                                   <div style="font-family:Arial;font-size:11px;line-height:1;text-align:left;color:#4185f5;flex-direction:row;"> 
-                                    <a class="bluetext" href="https://www.facebook.com/${fbCompanyName}" target="_blank">
+                                    <a class="bluetext" href="${fbCompanyName}" target="_blank">
                                       <img width="20px" src="${facebookLogo}" style="padding-right:8px">
                                     </a>
-                                    <a class="bluetext" href="https://twitter.com/${twCompanyName}" target="_blank">
+                                    <a class="bluetext" href="${twCompanyName}" target="_blank">
                                       <img width="20px" src="${twitterLogo}" style="padding-right:8px">
                                     </a>
-                                    <a class="bluetext" href="https://www.linkedin.com/${ldCompanyName}" target="_blank">
+                                    <a class="bluetext" href="${ldCompanyName}" target="_blank">
                                       <img width="20px" src="${linkedinLogo}" style="padding-right:8px">
                                     </a>
                                   </div>
