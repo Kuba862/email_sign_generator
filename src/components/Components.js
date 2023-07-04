@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate, useLocation } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   addUserData,
@@ -60,10 +60,10 @@ export const PersonalDataForm = () => {
     email: useSelector((state) => state.cart.email) || "",
   });
   const [socialData, setSocialData] = useState({
-    fb: 'https://www.facebook.com/citizengo',
-    tw: 'https://twitter.com/citizengo',
-    ld: 'https://www.linkedin.com/company/citizengo/',
-    web: 'https://citizengo.org/',
+    fb: useSelector((state) => state.cart.fb) || 'https://www.facebook.com/citizengo',
+    tw: useSelector((state) => state.cart.tw) || 'https://twitter.com/citizengo',
+    ld: useSelector((state) => state.cart.ld) || 'https://www.linkedin.com/company/citizengo/',
+    web: useSelector((state) => state.cart.web) || 'https://citizengo.org/',
   });
 
   const navigate = useNavigate();
@@ -171,7 +171,7 @@ export const PersonalDataForm = () => {
           else if (correctEmailDomain) {
             saveUserData();
             saveSocialData();
-            navigate('/sign-generator');
+            navigate('/sign-generator', { state: { socialData } });
           } else if (!correctEmailDomain) {
             alert('Wrong email domain!');
           }
@@ -210,13 +210,15 @@ export const InputData = ({
 
 export const SignatureGenerator = () => {
 
+  const { state } = useLocation();
+
   const [showHTML, setShowHTML] = useState(false);
   const [textCp, setTextCp] = useState(false);
   const [socialUrls, setSocialUrls] = useState({
-    fb: '',
-    tw: '',
-    ld: '',
-    web: '',
+    fb: state.socialData.fb || '',
+    tw: state.socialData.tw || '',
+    ld: state.socialData.ld || '',
+    web: state.socialData.web || '',
   });
   const [logo, setLogo] = useState(null);
   const userData = useSelector((state) => state.cart);
@@ -231,53 +233,53 @@ export const SignatureGenerator = () => {
   const updateSocialMediaLinks = () => {
     switch (domain[1]) {
       case 'citizengo':
-        setSocialUrls({
-          ...socialUrls,
-          fb: 'citizengo',
-          tw: 'citizengo',
-          ld: 'https://www.linkedin.com/company/citizengo/',
-          web: 'https://citizengo.org/',
-        });
+        // setSocialUrls({
+        //   ...socialUrls,
+        //   fb: 'citizengo',
+        //   tw: 'citizengo',
+        //   ld: 'https://www.linkedin.com/company/citizengo/',
+        //   web: 'https://citizengo.org/',
+        // });
         setLogo(CGO_LOGO);
         break;
       case 'maslibres':
-        setSocialUrls({
-          ...socialUrls,
-          fb: 'maslibres',
-          tw: 'maslibres',
-          ld: '',
-          web: 'https://maslibres.org/',
-        });
+        // setSocialUrls({
+        //   ...socialUrls,
+        //   fb: 'maslibres',
+        //   tw: 'maslibres',
+        //   ld: '',
+        //   web: 'https://maslibres.org/',
+        // });
         setLogo(LIBRES_LOGO);
         break;
       case 'votavalores':
-        setSocialUrls({
-          ...socialUrls,
-          fb: 'HazteOir.org',
-          tw: 'hazteoir',
-          ld: '',
-          web: 'https://www.votavalores.org/',
-        });
+        // setSocialUrls({
+        //   ...socialUrls,
+        //   fb: 'HazteOir.org',
+        //   tw: 'hazteoir',
+        //   ld: '',
+        //   web: 'https://www.votavalores.org/',
+        // });
         setLogo(VOTA_LOGO);
         break;
       case 'hazteoir':
-        setSocialUrls({
-          ...socialUrls,
-          fb: 'HazteOir.org',
-          tw: 'hazteoir',
-          ld: 'https://www.linkedin.com/company/hazteoir-org/about/',
-          web: 'https://citizengo.org/hazteoir',
-        });
+        // setSocialUrls({
+        //   ...socialUrls,
+        //   fb: 'HazteOir.org',
+        //   tw: 'hazteoir',
+        //   ld: 'https://www.linkedin.com/company/hazteoir-org/about/',
+        //   web: 'https://citizengo.org/hazteoir',
+        // });
         setLogo(HO_LOGO);
         break;
       case 'derechoavivir':
-        setSocialUrls({
-          ...socialUrls,
-          fb: 'derechoavivir.org',
-          tw: 'derechoavivir',
-          ld: '',
-          web: 'https://derechoavivir.org/',
-        });
+        // setSocialUrls({
+        //   ...socialUrls,
+        //   fb: 'derechoavivir.org',
+        //   tw: 'derechoavivir',
+        //   ld: '',
+        //   web: 'https://derechoavivir.org/',
+        // });
         setLogo(DAV_LOGO);
         break;
     }
