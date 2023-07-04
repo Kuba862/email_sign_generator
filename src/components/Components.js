@@ -179,12 +179,6 @@ export const PersonalDataForm = () => {
       >
         Create a signature
       </GoToGeneratorBtn>
-      <GoToGeneratorBtn onClick={() => {
-        dispatch(clearUserData());
-        window.location.reload();
-      }} >
-        clear all data
-      </GoToGeneratorBtn>
     </>
   );
 };
@@ -335,7 +329,7 @@ export const SignatureGenerator = () => {
               socialUrls.fb,
               socialUrls.tw,
               socialUrls.ld,
-              socialUrls.web
+              socialUrls.web,
             ),
           }}
         />
