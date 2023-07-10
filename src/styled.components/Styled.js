@@ -41,6 +41,7 @@ export const SignatureGeneratorContainer = styled.section`
       display: flex;
       flex-direction: column;
       flex-basis: 50%;
+      max-width: 600px;
       .copy_button {
         padding: 8px;
         width: 50%;
