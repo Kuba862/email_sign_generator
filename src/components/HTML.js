@@ -1,10 +1,10 @@
 import React from 'react';
 
-export const telImg = "https://citizengo-brand.wsc.design/firmas/img/tel.png";
-export const mailImg = "https://citizengo-brand.wsc.design/firmas/img/env.png";
-export const facebookLogo = "https://citizengo-brand.wsc.design/firmas/img/facebook_2x.png";
-export const twitterLogo = "https://citizengo-brand.wsc.design/firmas/img/twitter_2x.png";
-export const linkedinLogo = "https://citizengo-brand.wsc.design/firmas/img/linkedin_2x.png";
+// export const telImg = "https://citizengo-brand.wsc.design/firmas/img/tel.png";
+// export const mailImg = "https://citizengo-brand.wsc.design/firmas/img/env.png";
+// export const facebookLogo = "https://citizengo-brand.wsc.design/firmas/img/facebook_2x.png";
+// export const twitterLogo = "https://citizengo-brand.wsc.design/firmas/img/twitter_2x.png";
+// export const linkedinLogo = "https://citizengo-brand.wsc.design/firmas/img/linkedin_2x.png";
 
 export const HTML = ({
   logo,
@@ -16,6 +16,14 @@ export const HTML = ({
   twCompanyName,
   ldCompanyName,
   websiteUrl,
+  facebookLogo,
+  twitterLogo,
+  linkedinLogo,
+  telImg,
+  mailImg,
+  instaCompanyName,
+  instagramLogo,
+  fontColor
 }) => {
   return `<!doctype html>
     <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
@@ -144,6 +152,9 @@ export const HTML = ({
                                         <a class="bluetext" href="${ldCompanyName}" target="_blank">
                                           <img width="20px" src="${linkedinLogo}" style="padding-right:8px">
                                         </a>
+                                        <a class="bluetext" href="${instaCompanyName}" target="_blank">
+                                          <img width="20px" src="${instagramLogo}" style="padding-right:8px">
+                                        </a>
                                       </div>
                                     </td>
                                   </tr>
@@ -155,7 +166,7 @@ export const HTML = ({
                                   <tr> 
                                     <td align="left" style="font-size:0;padding:10px 25px;padding-top:0;padding-bottom:0;padding-left:15px;word-break:break-word"> 
                                       <div style="font-family:Arial;font-size:11px;line-height:1;text-align:left;color:#4185f5">
-                                        <a class="bluetext" href="${websiteUrl}" target="_blank">${websiteUrl}</a>
+                                        <a style="color:${fontColor}" href="${websiteUrl}" target="_blank">${websiteUrl}</a>
                                       </div>
                                     </td>
                                   </tr>
@@ -184,7 +195,15 @@ export const HTML_VAR = (logo,
     fbCompanyName,
   twCompanyName,
   ldCompanyName,
-    websiteUrl) => {
+  websiteUrl,
+  mailImg,
+  telImg,
+  facebookLogo,
+  twitterLogo,
+  linkedinLogo, instagramLogo,
+  instaCompanyName,
+  fontColor
+  ) => {
   return `<!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
   <head>
@@ -312,6 +331,9 @@ export const HTML_VAR = (logo,
                                     <a class="bluetext" href="${ldCompanyName}" target="_blank">
                                       <img width="20px" src="${linkedinLogo}" style="padding-right:8px">
                                     </a>
+                                    <a class="bluetext" href="${instaCompanyName}" target="_blank">
+                                      <img width="20px" src="${instagramLogo}" style="padding-right:8px">
+                                    </a>
                                   </div>
                                 </td>
                               </tr>
@@ -323,7 +345,7 @@ export const HTML_VAR = (logo,
                               <tr> 
                                 <td align="left" style="font-size:0;padding:10px 25px;padding-top:0;padding-bottom:0;padding-left:15px;word-break:break-word"> 
                                   <div style="font-family:Arial;font-size:11px;line-height:1;text-align:left;color:#4185f5">
-                                    <a class="bluetext" href="${websiteUrl}" target="_blank">${websiteUrl}</a>
+                                    <a style="color:${fontColor}" href="${websiteUrl}" target="_blank">${websiteUrl}</a>
                                   </div>
                                 </td>
                               </tr>

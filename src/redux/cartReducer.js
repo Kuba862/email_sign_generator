@@ -20,6 +20,7 @@ export const cartSlice = createSlice({
             state.fb = action.payload.fb
             state.tw = action.payload.tw
             state.ld = action.payload.ld
+            state.insta = action.payload.insta
         },
         clearUserData: (state) => {
             return initialState;
