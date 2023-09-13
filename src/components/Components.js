@@ -323,7 +323,7 @@ export const SignatureGenerator = () => {
           linkedin: CgoLd,
           instagram: CgoInsta,
         });
-        setLogo(CGO_LOGO);
+        setLogo("https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/cgoIcons/logo.png");
         setColor('#4285f4');
         break;
       case 'maslibres':
@@ -335,7 +335,7 @@ export const SignatureGenerator = () => {
           twitter: LibresTw,
           instagram: LibresInsta,
         });
-        setLogo(LIBRES_LOGO);
+        setLogo("https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/libresIcon/logo.png");
         setColor('#f3a329');
         break;
       case 'votavalores':
@@ -347,7 +347,7 @@ export const SignatureGenerator = () => {
           twitter: VotaTw,
           instagram: VotaInsta,
         });
-        setLogo(VOTA_LOGO);
+        setLogo("https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/votavoloresIcon/logo.png");
         setColor('#f7c300');
         break;
       case 'hazteoir':
@@ -359,7 +359,7 @@ export const SignatureGenerator = () => {
           twitter: HoTw,
           instagram: HoInsta,
         });
-        setLogo(HO_LOGO);
+        setLogo("https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/hoIcons/logo.png");
         setColor('#ed8b00');
         break;
       case 'derechoavivir':
@@ -371,7 +371,7 @@ export const SignatureGenerator = () => {
           twitter: DerechoTw,
           instagram: DerecgoInsta,
         });
-        setLogo(DAV_LOGO);
+        setLogo("https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/derechoIcons/logo.png");
         setColor('#a6192e');
         break;
     }
