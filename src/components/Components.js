@@ -4,59 +4,56 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   addUserData,
   addSocialData,
-  clearUserData,
 } from '../redux/cartReducer';
-import { HTML, HTML_VAR } from './HTML';
+import { HTML_VAR } from './HTML';
 import {
   SignatureGeneratorContainer,
-  HTML_to_copy,
   CopyConfirmation,
   Title,
   PersonalDataFormStyled,
   GoToGeneratorBtn,
   CompanyDataForm,
 } from '../styled.components/Styled';
-import CGO_LOGO from '../images/cgoIcons/logo.png';
-import HO_LOGO from '../images/hoIcons/logo.png';
-import DAV_LOGO from '../images/derechoIcons/logo.png';
-import VOTA_LOGO from '../images/votavoloresIcon/logo.png';
-import LIBRES_LOGO from '../images/libresIcon/logo.png';
-import { FormSelection } from '../styled.components/Styled';
+import { FormSelection, HintSection, HintButton } from '../styled.components/Styled';
 
-import DerechoEmail from '../images/derechoIcons/email.png';
-import DerechoTel from '../images/derechoIcons/mobile.png';
-import DerechFb from '../images/derechoIcons/facebook.png';
-import DerechoLd from '../images/derechoIcons/linkedin.png';
-import DerechoTw from '../images/derechoIcons/twitter.png';
-import DerecgoInsta from '../images/derechoIcons/instagram.png';
+import stepFirst from '../images/1.png';
+import stepSecond from '../images/2.png';
+import stepThird from '../images/3.png';
 
-import HoEmail from '../images/hoIcons/email.png';
-import HoTel from '../images/hoIcons/mobile.png';
-import HoFb from '../images/hoIcons/facebook.png';
-import HoLd from '../images/hoIcons/linkedin.png';
-import HoTw from '../images/hoIcons/twitter.png';
-import HoInsta from '../images/hoIcons/instagram.png';
+const DerechoEmail = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/derechoIcons/email.png';
+const DerechoTel = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/derechoIcons/mobile.png';
+const DerechFb = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/derechoIcons/facebook.png';
+const DerechoLd = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/derechoIcons/linkedin.png';
+const DerechoTw = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/derechoIcons/twitter.png';
+const DerecgoInsta = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/derechoIcons/instagram.png';
 
-import LibresEmail from '../images/libresIcon/email.png';
-import LibresTel from '../images/libresIcon/mobile.png';
-import LibresFb from '../images/libresIcon/facebook.png';
-import LibresLd from '../images/libresIcon/linkedin.png';
-import LibresTw from '../images/libresIcon/twitter.png';
-import LibresInsta from '../images/libresIcon/instagram.png';
+const HoEmail = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/hoIcons/email.png';
+const HoTel = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/hoIcons/mobile.png';
+const HoFb = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/hoIcons/facebook.png';
+const HoLd = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/hoIcons/linkedin.png';
+const HoInsta = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/hoIcons/instagram.png';
+const HoTw = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/hoIcons/twitter.png';
 
-import CgoEmail from '../images/cgoIcons/email.png';
-import CgoTel from '../images/cgoIcons/mobile.png';
-import CgoFb from '../images/cgoIcons/facebook.png';
-import CgoLd from '../images/cgoIcons/linkedin.png';
-import CgoTw from '../images/cgoIcons/twitter.png';
-import CgoInsta from '../images/cgoIcons/instagram.png';
+const LibresEmail = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/libresIcon/email.png';
+const LibresTel = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/libresIcon/mobile.png';
+const LibresFb = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/libresIcon/facebook.png';
+const LibresLd = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/libresIcon/linkedin.png';
+const LibresTw = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/libresIcon/twitter.png';
+const LibresInsta = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/libresIcon/instagram.png';
 
-import VotaEmail from '../images/votavoloresIcon/email.png';
-import VotaTel from '../images/votavoloresIcon/mobile.png';
-import VotaFb from '../images/votavoloresIcon/facebook.png';
-import VotaLd from '../images/votavoloresIcon/linkedin.png';
-import VotaTw from '../images/votavoloresIcon/twitter.png';
-import VotaInsta from '../images/votavoloresIcon/instagram.png';
+const CgoEmail = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/cgoIcons/email.png';
+const CgoTel = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/cgoIcons/mobile.png';
+const CgoFb = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/cgoIcons/facebook.png';
+const CgoLd = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/cgoIcons/linkedin.png';
+const CgoTw = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/cgoIcons/twitter.png';
+const CgoInsta = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/cgoIcons/instagram.png';
+
+const VotaEmail = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/votavoloresIcon/email.png';
+const VotaTel = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/votavoloresIcon/mobile.png';
+const VotaFb = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/votavoloresIcon/facebook.png';
+const VotaLd = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/votavoloresIcon/linkedin.png';
+const VotaTw = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/votavoloresIcon/twitter.png';
+const VotaInsta = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/votavoloresIcon/instagram.png';
 
 export const Header = () => <Title>EMAIL SIGNATURE GENERATOR</Title>;
 
@@ -303,6 +300,9 @@ export const SignatureGenerator = () => {
     instagram: '',
   });
   const [color, setColor] = useState('');
+
+  const [hintStep, setHintStep] = useState(1);
+
   const userData = useSelector((state) => state.cart);
   const navigate = useNavigate();
 
@@ -383,19 +383,32 @@ export const SignatureGenerator = () => {
 
   const { name, email, position, phoneNumber } = userData;
 
-  const copyHtmlContainerText = () => {
-    const container = document.getElementById('html_container').textContent;
-    navigator.clipboard.writeText(container);
-    setTextCp(true);
-  };
+  // const copyHtmlContainerText = () => {
+  //   const container = document.getElementById('html_container').textContent;
+  //   navigator.clipboard.writeText(container);
+  //   setTextCp(true);
+  // };
+
+  // useEffect(() => {
+  //   if (textCp) {
+  //     setTimeout(() => {
+  //       setTextCp(false);
+  //     }, 3000);
+  //   }
+  // }, [textCp]);
 
   useEffect(() => {
-    if (textCp) {
-      setTimeout(() => {
-        setTextCp(false);
-      }, 3000);
-    }
-  }, [textCp]);
+    const interval = setInterval(() => {
+      if(hintStep === 1) {
+        setHintStep(2);
+      } else if(hintStep === 2) {
+        setHintStep(3);
+      }
+    }, 3000);
+    setTimeout(() => {
+      clearInterval(interval);
+    }, 6000)
+  }, [hintStep]);
 
   return (
     <SignatureGeneratorContainer>
@@ -403,12 +416,12 @@ export const SignatureGenerator = () => {
         <button className="back_btn" onClick={() => navigate('/')}>
           personal data
         </button>
-        <button
+        {/* <button
           className={showHTML ? 'show_html_btn active' : 'show_html_btn'}
           onClick={showHTMLAndCopy}
         >
           {!showHTML ? 'show HTML' : 'hide HTML'}
-        </button>
+        </button> */}
       </div>
       <div className="container">
         <div
@@ -435,18 +448,33 @@ export const SignatureGenerator = () => {
             ),
           }}
         />
-        {textCp && (
+        <HintSection>
+          <div className='steps_container' >
+            <h3>steps to do:</h3>
+          {hintStep === 1 && (
+            <div className='step' ><p>1. mark your signature</p> <img width={200} src={stepFirst} /></div>
+          )}
+          {hintStep === 2 && (
+              <div className='step' ><p>2. copy your signature</p> <img width={600} src={stepSecond} /></div>
+          )}
+          {hintStep === 3 && (
+              <div className='step' ><p>3. paste your signature</p> <img width={600} src={stepThird} /></div>
+          )}
+          </div>
+          {hintStep === 3 && (<HintButton onClick={() => setHintStep(1)} >run hints again</HintButton>)}
+        </HintSection>
+        {/* {textCp && (
           <CopyConfirmation>
             <p>The HTML code has been copied. You can paste it</p>
           </CopyConfirmation>
-        )}
-        {showHTML && (
+        )} */}
+        {/* {showHTML && (
           <>
             <HTML_to_copy id="html_container">
               <button className="copy_button" onClick={copyHtmlContainerText}>
                 copy
-              </button>
-              <HTML
+              </button> */}
+              {/* <HTML
                 phoneNumber={phoneNumber}
                 email={email}
                 userName={name}
@@ -464,10 +492,10 @@ export const SignatureGenerator = () => {
                 instaCompanyName={socialUrls.insta}
                 instagramLogo={images.instagram}
                 fontColor={color}
-              />
-            </HTML_to_copy>
-          </>
-        )}
+              /> */}
+            {/* </HTML_to_copy> */}
+          {/* </> */}
+        {/* )} */}
       </div>
     </SignatureGeneratorContainer>
   );

@@ -191,3 +191,45 @@ export const GoToGeneratorBtn = styled.button`
     display: none;
   }
 `;
+
+export const HintSection = styled.section`
+  align-self: end;
+  .steps_container {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    h3 {
+      text-transform: uppercase;
+      color: #444;
+    }
+    .step {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      p {
+        font-size: 18px;
+        font-weight: 700;
+        color: #444;
+      }
+      img {
+        border-radius: 5px;
+      }
+    }
+  }
+`;
+
+export const HintButton = styled.button`
+  display: flex;
+  justify-content: center;
+  background-color: #fff;
+  margin: 30px auto;
+  padding: 8px 12px;
+  font-size: 1.1rem;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  transition: 0.2s ease-in-out;
+  cursor: pointer;
+  &:hover {
+    box-shadow: -10px 10px 20px 5px #adacad;
+  }
+`;
