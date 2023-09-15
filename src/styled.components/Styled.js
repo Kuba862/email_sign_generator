@@ -79,21 +79,6 @@ export const HTML_to_copy = styled.div`
   line-height: 1.4;
 `;
 
-export const CopyConfirmation = styled.div`
-  position: absolute;
-  display: flex;
-  top: 300px;
-  right: 550px;
-  width: 200px;
-  height: 150px;
-  text-align: center;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: inset 0px 0px 15px 5px #adacad;
-  p {
-    align-self: center;
-  }
-`;
 export const Title = styled.h1`
   display: flex;
   justify-content: center;
@@ -198,9 +183,11 @@ export const HintSection = styled.section`
     display: flex;
     flex-direction: column;
     gap: 50px;
-    h3 {
+    p {
       text-transform: uppercase;
       color: #444;
+      text-align: center;
+      font-size: 1.2rem;
     }
     .step {
       display: flex;
@@ -218,6 +205,10 @@ export const HintSection = styled.section`
   }
 `;
 
+export const HintButtonsSection = styled.div`
+display: flex;
+`
+
 export const HintButton = styled.button`
   display: flex;
   justify-content: center;
@@ -226,10 +217,11 @@ export const HintButton = styled.button`
   padding: 8px 12px;
   font-size: 1.1rem;
   border-radius: 5px;
-  border: 1px solid transparent;
+  border: 1px solid #ccc;
   transition: 0.2s ease-in-out;
   cursor: pointer;
   &:hover {
+    border: 1px solid transparent;
     box-shadow: -10px 10px 20px 5px #adacad;
   }
 `;

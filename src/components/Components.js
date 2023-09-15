@@ -8,17 +8,16 @@ import {
 import { HTML_VAR } from './HTML';
 import {
   SignatureGeneratorContainer,
-  CopyConfirmation,
   Title,
   PersonalDataFormStyled,
   GoToGeneratorBtn,
   CompanyDataForm,
 } from '../styled.components/Styled';
-import { FormSelection, HintSection, HintButton } from '../styled.components/Styled';
+import { FormSelection, HintSection, HintButton, HintButtonsSection } from '../styled.components/Styled';
 
-import stepFirst from '../images/1.png';
-import stepSecond from '../images/2.png';
-import stepThird from '../images/3.png';
+import stepFirst from '../images/1.gif';
+import stepSecond from '../images/2.gif';
+import stepThird from '../images/3.gif';
 
 const DerechoEmail = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/derechoIcons/email.png';
 const DerechoTel = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/derechoIcons/mobile.png';
@@ -278,11 +277,12 @@ export const InputData = ({
 
 // signature generator
 
+export const Div = ({ paragraph_text, width, step_image }) => <div className='step' ><p>{paragraph_text}</p> <img width={width} src={step_image} /></div>
+
+
 export const SignatureGenerator = () => {
   const { state } = useLocation();
 
-  const [showHTML, setShowHTML] = useState(false);
-  const [textCp, setTextCp] = useState(false);
   const [socialUrls, setSocialUrls] = useState({
     fb: state.socialData.fb || '',
     tw: state.socialData.tw || '',
@@ -305,10 +305,6 @@ export const SignatureGenerator = () => {
 
   const userData = useSelector((state) => state.cart);
   const navigate = useNavigate();
-
-  const showHTMLAndCopy = () => {
-    setShowHTML(!showHTML);
-  };
 
   let domain = userData?.email?.match(/@([^.\s]+)/);
 
@@ -383,32 +379,9 @@ export const SignatureGenerator = () => {
 
   const { name, email, position, phoneNumber } = userData;
 
-  // const copyHtmlContainerText = () => {
-  //   const container = document.getElementById('html_container').textContent;
-  //   navigator.clipboard.writeText(container);
-  //   setTextCp(true);
-  // };
-
-  // useEffect(() => {
-  //   if (textCp) {
-  //     setTimeout(() => {
-  //       setTextCp(false);
-  //     }, 3000);
-  //   }
-  // }, [textCp]);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if(hintStep === 1) {
-        setHintStep(2);
-      } else if(hintStep === 2) {
-        setHintStep(3);
-      }
-    }, 3000);
-    setTimeout(() => {
-      clearInterval(interval);
-    }, 6000)
-  }, [hintStep]);
+  const showNextHint = () => {
+    setHintStep(hintStep + 1);
+  }
 
   return (
     <SignatureGeneratorContainer>
@@ -416,12 +389,6 @@ export const SignatureGenerator = () => {
         <button className="back_btn" onClick={() => navigate('/')}>
           personal data
         </button>
-        {/* <button
-          className={showHTML ? 'show_html_btn active' : 'show_html_btn'}
-          onClick={showHTMLAndCopy}
-        >
-          {!showHTML ? 'show HTML' : 'hide HTML'}
-        </button> */}
       </div>
       <div className="container">
         <div
@@ -450,52 +417,22 @@ export const SignatureGenerator = () => {
         />
         <HintSection>
           <div className='steps_container' >
-            <h3>steps to do:</h3>
+            <p>steps to do:</p>
           {hintStep === 1 && (
-            <div className='step' ><p>1. mark your signature</p> <img width={200} src={stepFirst} /></div>
+            <Div paragraph_text="1. mark your signature" width="600" step_image={stepFirst} />
           )}
           {hintStep === 2 && (
-              <div className='step' ><p>2. copy your signature</p> <img width={600} src={stepSecond} /></div>
+              <Div paragraph_text="2. copy your signature" width="600" step_image={stepSecond} />
           )}
           {hintStep === 3 && (
-              <div className='step' ><p>3. paste your signature</p> <img width={600} src={stepThird} /></div>
+              <Div paragraph_text="3. paste your signature" width="600" step_image={stepThird} />
           )}
           </div>
-          {hintStep === 3 && (<HintButton onClick={() => setHintStep(1)} >run hints again</HintButton>)}
+          <HintButtonsSection>
+          <HintButton onClick={() => setHintStep(1)} >{hintStep !== 3 ? "prev" : "first"}</HintButton>
+          {hintStep !== 3 && (<HintButton onClick={showNextHint} >next</HintButton>)}
+          </HintButtonsSection>
         </HintSection>
-        {/* {textCp && (
-          <CopyConfirmation>
-            <p>The HTML code has been copied. You can paste it</p>
-          </CopyConfirmation>
-        )} */}
-        {/* {showHTML && (
-          <>
-            <HTML_to_copy id="html_container">
-              <button className="copy_button" onClick={copyHtmlContainerText}>
-                copy
-              </button> */}
-              {/* <HTML
-                phoneNumber={phoneNumber}
-                email={email}
-                userName={name}
-                possition={position}
-                fbCompanyName={socialUrls.fb}
-                twCompanyName={socialUrls.tw}
-                ldCompanyName={socialUrls.ls}
-                websiteUrl={socialUrls.web}
-                logo={logo}
-                facebookLogo={images.facebook}
-                twitterLogo={images.twitter}
-                linkedinLogo={images.linkedin}
-                telImg={images.tel}
-                mailImg={images.email}
-                instaCompanyName={socialUrls.insta}
-                instagramLogo={images.instagram}
-                fontColor={color}
-              /> */}
-            {/* </HTML_to_copy> */}
-          {/* </> */}
-        {/* )} */}
       </div>
     </SignatureGeneratorContainer>
   );
