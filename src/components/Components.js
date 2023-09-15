@@ -429,7 +429,9 @@ export const SignatureGenerator = () => {
           )}
           </div>
           <HintButtonsSection>
-          <HintButton onClick={() => setHintStep(1)} >{hintStep !== 3 ? "prev" : "first"}</HintButton>
+            {hintStep !== 1 && (
+              <HintButton onClick={() => setHintStep(1)} >{hintStep !== 3 ? "prev" : "first"}</HintButton>
+            )}
           {hintStep !== 3 && (<HintButton onClick={showNextHint} >next</HintButton>)}
           </HintButtonsSection>
         </HintSection>
