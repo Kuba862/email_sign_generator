@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  addUserData,
-  addSocialData,
-} from '../redux/cartReducer';
+import { addUserData, addSocialData } from '../redux/cartReducer';
 import { HTML_VAR } from './HTML';
 import {
   SignatureGeneratorContainer,
@@ -14,46 +11,80 @@ import {
   GoToGeneratorBtn,
   CompanyDataForm,
 } from '../styled.components/Styled';
-import { FormSelection, HintSection, HintButton } from '../styled.components/Styled';
+import {
+  FormSelection,
+  HintSection,
+  HintButton,
+} from '../styled.components/Styled';
 
 import stepFirst from '../images/1.png';
 import stepSecond from '../images/2.png';
 import stepThird from '../images/3.png';
 
-const DerechoEmail = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/derechoIcons/email.png';
-const DerechoTel = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/derechoIcons/mobile.png';
-const DerechFb = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/derechoIcons/facebook.png';
-const DerechoLd = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/derechoIcons/linkedin.png';
-const DerechoTw = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/derechoIcons/twitter.png';
-const DerecgoInsta = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/derechoIcons/instagram.png';
+const DerechoEmail =
+  'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/derechoIcons/email.png';
+const DerechoTel =
+  'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/derechoIcons/mobile.png';
+const DerechFb =
+  'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/derechoIcons/facebook.png';
+const DerechoLd =
+  'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/derechoIcons/linkedin.png';
+const DerechoTw =
+  'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/derechoIcons/twitter.png';
+const DerecgoInsta =
+  'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/derechoIcons/instagram.png';
 
-const HoEmail = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/hoIcons/email.png';
-const HoTel = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/hoIcons/mobile.png';
-const HoFb = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/hoIcons/facebook.png';
-const HoLd = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/hoIcons/linkedin.png';
-const HoInsta = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/hoIcons/instagram.png';
-const HoTw = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/hoIcons/twitter.png';
+const HoEmail =
+  'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/hoIcons/email.png';
+const HoTel =
+  'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/hoIcons/mobile.png';
+const HoFb =
+  'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/hoIcons/facebook.png';
+const HoLd =
+  'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/hoIcons/linkedin.png';
+const HoInsta =
+  'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/hoIcons/instagram.png';
+const HoTw =
+  'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/hoIcons/twitter.png';
 
-const LibresEmail = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/libresIcon/email.png';
-const LibresTel = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/libresIcon/mobile.png';
-const LibresFb = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/libresIcon/facebook.png';
-const LibresLd = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/libresIcon/linkedin.png';
-const LibresTw = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/libresIcon/twitter.png';
-const LibresInsta = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/libresIcon/instagram.png';
+const LibresEmail =
+  'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/libresIcon/email.png';
+const LibresTel =
+  'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/libresIcon/mobile.png';
+const LibresFb =
+  'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/libresIcon/facebook.png';
+const LibresLd =
+  'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/libresIcon/linkedin.png';
+const LibresTw =
+  'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/libresIcon/twitter.png';
+const LibresInsta =
+  'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/libresIcon/instagram.png';
 
-const CgoEmail = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/cgoIcons/email.png';
-const CgoTel = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/cgoIcons/mobile.png';
-const CgoFb = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/cgoIcons/facebook.png';
-const CgoLd = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/cgoIcons/linkedin.png';
-const CgoTw = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/cgoIcons/twitter.png';
-const CgoInsta = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/cgoIcons/instagram.png';
+const CgoEmail =
+  'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/cgoIcons/email.png';
+const CgoTel =
+  'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/cgoIcons/mobile.png';
+const CgoFb =
+  'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/cgoIcons/facebook.png';
+const CgoLd =
+  'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/cgoIcons/linkedin.png';
+const CgoTw =
+  'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/cgoIcons/twitter.png';
+const CgoInsta =
+  'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/cgoIcons/instagram.png';
 
-const VotaEmail = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/votavoloresIcon/email.png';
-const VotaTel = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/votavoloresIcon/mobile.png';
-const VotaFb = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/votavoloresIcon/facebook.png';
-const VotaLd = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/votavoloresIcon/linkedin.png';
-const VotaTw = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/votavoloresIcon/twitter.png';
-const VotaInsta = 'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/votavoloresIcon/instagram.png';
+const VotaEmail =
+  'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/votavoloresIcon/email.png';
+const VotaTel =
+  'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/votavoloresIcon/mobile.png';
+const VotaFb =
+  'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/votavoloresIcon/facebook.png';
+const VotaLd =
+  'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/votavoloresIcon/linkedin.png';
+const VotaTw =
+  'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/votavoloresIcon/twitter.png';
+const VotaInsta =
+  'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/votavoloresIcon/instagram.png';
 
 export const Header = () => <Title>EMAIL SIGNATURE GENERATOR</Title>;
 
@@ -323,7 +354,9 @@ export const SignatureGenerator = () => {
           linkedin: CgoLd,
           instagram: CgoInsta,
         });
-        setLogo("https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/cgoIcons/logo.png");
+        setLogo(
+          'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/cgoIcons/logo.png'
+        );
         setColor('#4285f4');
         break;
       case 'maslibres':
@@ -335,7 +368,9 @@ export const SignatureGenerator = () => {
           twitter: LibresTw,
           instagram: LibresInsta,
         });
-        setLogo("https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/libresIcon/logo.png");
+        setLogo(
+          'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/libresIcon/logo.png'
+        );
         setColor('#f3a329');
         break;
       case 'votavalores':
@@ -347,7 +382,9 @@ export const SignatureGenerator = () => {
           twitter: VotaTw,
           instagram: VotaInsta,
         });
-        setLogo("https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/votavoloresIcon/logo.png");
+        setLogo(
+          'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/votavoloresIcon/logo.png'
+        );
         setColor('#f7c300');
         break;
       case 'hazteoir':
@@ -359,7 +396,9 @@ export const SignatureGenerator = () => {
           twitter: HoTw,
           instagram: HoInsta,
         });
-        setLogo("https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/hoIcons/logo.png");
+        setLogo(
+          'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/hoIcons/logo.png'
+        );
         setColor('#ed8b00');
         break;
       case 'derechoavivir':
@@ -371,7 +410,9 @@ export const SignatureGenerator = () => {
           twitter: DerechoTw,
           instagram: DerecgoInsta,
         });
-        setLogo("https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/derechoIcons/logo.png");
+        setLogo(
+          'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/derechoIcons/logo.png'
+        );
         setColor('#a6192e');
         break;
     }
@@ -383,31 +424,17 @@ export const SignatureGenerator = () => {
 
   const { name, email, position, phoneNumber } = userData;
 
-  // const copyHtmlContainerText = () => {
-  //   const container = document.getElementById('html_container').textContent;
-  //   navigator.clipboard.writeText(container);
-  //   setTextCp(true);
-  // };
-
-  // useEffect(() => {
-  //   if (textCp) {
-  //     setTimeout(() => {
-  //       setTextCp(false);
-  //     }, 3000);
-  //   }
-  // }, [textCp]);
-
   useEffect(() => {
     const interval = setInterval(() => {
-      if(hintStep === 1) {
+      if (hintStep === 1) {
         setHintStep(2);
-      } else if(hintStep === 2) {
+      } else if (hintStep === 2) {
         setHintStep(3);
       }
     }, 3000);
     setTimeout(() => {
       clearInterval(interval);
-    }, 6000)
+    }, 6000);
   }, [hintStep]);
 
   return (
@@ -449,53 +476,33 @@ export const SignatureGenerator = () => {
           }}
         />
         <HintSection>
-          <div className='steps_container' >
+          <div className="steps_container">
             <h3>steps to do:</h3>
-          {hintStep === 1 && (
-            <div className='step' ><p>1. mark your signature</p> <img width={200} src={stepFirst} /></div>
-          )}
-          {hintStep === 2 && (
-              <div className='step' ><p>2. copy your signature</p> <img width={600} src={stepSecond} /></div>
-          )}
-          {hintStep === 3 && (
-              <div className='step' ><p>3. paste your signature</p> <img width={600} src={stepThird} /></div>
-          )}
+            {hintStep === 1 && (
+              <div className="step">
+                <p>1. mark your signature</p>{' '}
+                <img width={200} src={stepFirst} />
+              </div>
+            )}
+            {hintStep === 2 && (
+              <div className="step">
+                <p>2. copy your signature</p>{' '}
+                <img width={600} src={stepSecond} />
+              </div>
+            )}
+            {hintStep === 3 && (
+              <div className="step">
+                <p>3. paste your signature</p>{' '}
+                <img width={600} src={stepThird} />
+              </div>
+            )}
           </div>
-          {hintStep === 3 && (<HintButton onClick={() => setHintStep(1)} >run hints again</HintButton>)}
+          {hintStep === 3 && (
+            <HintButton onClick={() => setHintStep(1)}>
+              run hints again
+            </HintButton>
+          )}
         </HintSection>
-        {/* {textCp && (
-          <CopyConfirmation>
-            <p>The HTML code has been copied. You can paste it</p>
-          </CopyConfirmation>
-        )} */}
-        {/* {showHTML && (
-          <>
-            <HTML_to_copy id="html_container">
-              <button className="copy_button" onClick={copyHtmlContainerText}>
-                copy
-              </button> */}
-              {/* <HTML
-                phoneNumber={phoneNumber}
-                email={email}
-                userName={name}
-                possition={position}
-                fbCompanyName={socialUrls.fb}
-                twCompanyName={socialUrls.tw}
-                ldCompanyName={socialUrls.ls}
-                websiteUrl={socialUrls.web}
-                logo={logo}
-                facebookLogo={images.facebook}
-                twitterLogo={images.twitter}
-                linkedinLogo={images.linkedin}
-                telImg={images.tel}
-                mailImg={images.email}
-                instaCompanyName={socialUrls.insta}
-                instagramLogo={images.instagram}
-                fontColor={color}
-              /> */}
-            {/* </HTML_to_copy> */}
-          {/* </> */}
-        {/* )} */}
       </div>
     </SignatureGeneratorContainer>
   );

@@ -75,7 +75,7 @@ export const HTML_VAR = (logo,
               <img style="margin-right: 10px;" width="14" src="${telImg}">
               <p>${phoneNumber}</p>
           </div>
-          <div style="display: flex;align-items: center;gap: 5px;padding: 5px 0;font-size: 11px;color: #444;" >
+          <div style="display: flex;align-items: center;gap: 5px;padding: 5px 0;font-size: 11px;color: #444;margin-bottom: 15px" >
               <img style="margin-right: 10px;" width="14" src="${mailImg}">
               <p>${email}</p>
           </div>
