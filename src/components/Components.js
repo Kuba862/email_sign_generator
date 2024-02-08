@@ -11,6 +11,7 @@ import {
   GoToGeneratorBtn,
   CompanyDataForm,
 } from '../styled.components/Styled';
+// cgo:$apr1$bWFKR1a1$JkECUNyO61eWS7QdSqqyY1
 import {
   FormSelection,
   HintSection,
