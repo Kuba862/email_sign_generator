@@ -5,22 +5,20 @@ import { addUserData, addSocialData } from '../redux/cartReducer';
 import { HTML_VAR } from './HTML';
 import {
   SignatureGeneratorContainer,
-  CopyConfirmation,
   Title,
   PersonalDataFormStyled,
   GoToGeneratorBtn,
   CompanyDataForm,
 } from '../styled.components/Styled';
-// cgo:$apr1$bWFKR1a1$JkECUNyO61eWS7QdSqqyY1
 import {
   FormSelection,
   HintSection,
   HintButton,
 } from '../styled.components/Styled';
 
-import stepFirst from '../images/1.png';
-import stepSecond from '../images/2.png';
-import stepThird from '../images/3.png';
+import stepFirst from '../images/1.gif';
+import stepSecond from '../images/2.gif';
+import stepThird from '../images/3.gif';
 
 const DerechoEmail =
   'https://storage.googleapis.com/cgo-public/contact-center-faq-files/img/derechoIcons/email.png';
@@ -310,11 +308,12 @@ export const InputData = ({
 
 // signature generator
 
+export const Div = ({ paragraph_text, width, step_image }) => <div className='step' ><p>{paragraph_text}</p> <img width={width} src={step_image} /></div>
+
+
 export const SignatureGenerator = () => {
   const { state } = useLocation();
 
-  const [showHTML, setShowHTML] = useState(false);
-  const [textCp, setTextCp] = useState(false);
   const [socialUrls, setSocialUrls] = useState({
     fb: state.socialData.fb || '',
     tw: state.socialData.tw || '',
@@ -337,10 +336,6 @@ export const SignatureGenerator = () => {
 
   const userData = useSelector((state) => state.cart);
   const navigate = useNavigate();
-
-  const showHTMLAndCopy = () => {
-    setShowHTML(!showHTML);
-  };
 
   let domain = userData?.email?.match(/@([^.\s]+)/);
 
@@ -425,6 +420,7 @@ export const SignatureGenerator = () => {
 
   const { name, email, position, phoneNumber } = userData;
 
+<<<<<<< HEAD
   useEffect(() => {
     const interval = setInterval(() => {
       if (hintStep === 1) {
@@ -437,6 +433,11 @@ export const SignatureGenerator = () => {
       clearInterval(interval);
     }, 6000);
   }, [hintStep]);
+=======
+  const showNextHint = () => {
+    setHintStep(hintStep + 1);
+  }
+>>>>>>> d9b9b9061ddc088d2453d154f40ce51c1690b296
 
   return (
     <SignatureGeneratorContainer>
@@ -444,12 +445,6 @@ export const SignatureGenerator = () => {
         <button className="back_btn" onClick={() => navigate('/')}>
           personal data
         </button>
-        {/* <button
-          className={showHTML ? 'show_html_btn active' : 'show_html_btn'}
-          onClick={showHTMLAndCopy}
-        >
-          {!showHTML ? 'show HTML' : 'hide HTML'}
-        </button> */}
       </div>
       <div className="container">
         <div
@@ -477,6 +472,7 @@ export const SignatureGenerator = () => {
           }}
         />
         <HintSection>
+<<<<<<< HEAD
           <div className="steps_container">
             <h3>steps to do:</h3>
             {hintStep === 1 && (
@@ -503,6 +499,26 @@ export const SignatureGenerator = () => {
               run hints again
             </HintButton>
           )}
+=======
+          <div className='steps_container' >
+            <p>steps to do:</p>
+          {hintStep === 1 && (
+            <Div paragraph_text="1. mark your signature" width="600" step_image={stepFirst} />
+          )}
+          {hintStep === 2 && (
+              <Div paragraph_text="2. copy your signature" width="600" step_image={stepSecond} />
+          )}
+          {hintStep === 3 && (
+              <Div paragraph_text="3. paste your signature" width="600" step_image={stepThird} />
+          )}
+          </div>
+          <HintButtonsSection>
+            {hintStep !== 1 && (
+              <HintButton onClick={() => setHintStep(1)} >{hintStep !== 3 ? "prev" : "first"}</HintButton>
+            )}
+          {hintStep !== 3 && (<HintButton onClick={showNextHint} >next</HintButton>)}
+          </HintButtonsSection>
+>>>>>>> d9b9b9061ddc088d2453d154f40ce51c1690b296
         </HintSection>
       </div>
     </SignatureGeneratorContainer>
