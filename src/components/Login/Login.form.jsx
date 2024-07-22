@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
+import { FormStyled } from '../../styled/Form.styled';
 
 const Login = () => {
   const [isAuth, setIsAuth] = useState(false);
@@ -28,17 +29,19 @@ const Login = () => {
     }
   };
   return (
+    <FormStyled>
     <form onSubmit={loginUser}>
       <div>
         <label htmlFor="email">Email</label>
-        <input type="email" id="email" ref={userEmailRef} />
+        <input required type="email" id="email" ref={userEmailRef} />
       </div>
       <div>
         <label htmlFor="password">Password</label>
-        <input type="password" id="password" ref={userPasswordRef} />
+        <input required type="password" id="password" ref={userPasswordRef} />
       </div>
       <button type="submit">Login</button>
     </form>
+    </FormStyled>
   );
 };
 
