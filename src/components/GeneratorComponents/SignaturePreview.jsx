@@ -9,18 +9,16 @@ const SignaturePreview = () => {
     name,
     position,
     phone,
-    phoneIconUrl,
-    phoneIconWidth,
     email,
-    emailIconUrl,
-    emailIconWidth,
     website,
     socialMedia,
-    textColor,
     textTopSpaces,
-    textLeftSpace,
     textRightSpace,
-    fontSize,
+    nameSettings,
+    positionSettings,
+    phoneSettings,
+    emailSettings,
+    websiteSettings,
   } = useContext(GlobalContext);
   return (
     <Preview>
@@ -30,42 +28,54 @@ const SignaturePreview = () => {
         )}
         <p
           style={{
-            color: textColor,
-            margin: `${textTopSpaces}px ${textLeftSpace}px ${textTopSpaces}px ${textLeftSpace}px`,
+            position: 'relative',
+            color: nameSettings.color,
             width: 'fit-content',
-            fontSize: `${fontSize}px`,
+            fontSize: `${nameSettings.fontSize}px`,
+            fontWeight: nameSettings.bold,
+            textDecoration: nameSettings.underline ? 'underline' : 'none',
+            top: `${nameSettings.top}px`,
+            left: `${nameSettings.right}px`,
           }}
         >
           {name}
         </p>
         <p
           style={{
-            color: textColor,
-            margin: `${textTopSpaces}px ${textLeftSpace}px ${textTopSpaces}px ${textLeftSpace}px`,
+            position: 'relative',
+            color: positionSettings.color,
             width: 'fit-content',
-            fontSize: `${fontSize}px`,
+            fontSize: `${positionSettings.fontSize}px`,
+            fontWeight: positionSettings.bold,
+            textDecoration: positionSettings.underline ? 'underline' : 'none',
+            top: `${positionSettings.top}px`,
+            left: `${positionSettings.left}px`,
           }}
         >
           {position}
         </p>
         {phone && (
-          <div
-            style={{
-              color: textColor,
-              margin: `${textTopSpaces}px ${textLeftSpace}px ${textTopSpaces}px ${textLeftSpace}px`,
-            }}
-          >
-            {phoneIconUrl && (
+          <div>
+            {phoneSettings.iconUrl && (
               <img
-                src={phoneIconUrl}
+                src={phoneSettings.iconUrl}
                 alt="Phone"
-                style={{ width: `${phoneIconWidth}px`, marginRight: '10px' }}
+                style={{
+                  position: 'relative',
+                  width: `${phoneSettings.iconWidth}px`,
+                  left: `${phoneSettings.iconLeftSpace}px`,
+                }}
               />
             )}{' '}
             <span
               style={{
-                marginLeft: `${textRightSpace}px`,
-                fontSize: `${fontSize}px`,
+                position: 'relative',
+                color: phoneSettings.color,
+                fontSize: `${phoneSettings.fontSize}px`,
+                fontWeight: phoneSettings.bold,
+                textDecoration: phoneSettings.underline ? 'underline' : 'none',
+                top: `${phoneSettings.top}px`,
+                left: `${phoneSettings.left}px`,
               }}
             >
               {phone}
@@ -73,24 +83,28 @@ const SignaturePreview = () => {
           </div>
         )}
         {email && (
-          <div
-            style={{
-              margin: `${textTopSpaces}px ${textLeftSpace}px ${textTopSpaces}px ${textLeftSpace}px`,
-            }}
-          >
-            {emailIconUrl && (
+          <div>
+            {emailSettings.iconUrl && (
               <img
-                src={emailIconUrl}
+                src={emailSettings.iconUrl}
                 alt="Email"
-                style={{ width: `${emailIconWidth}px`, marginRight: '10px' }}
+                style={{
+                  position: 'relative',
+                  width: `${emailSettings.iconWidth}px`,
+                  left: `${emailSettings.iconLeftSpace}px`,
+                }}
               />
             )}{' '}
             <a
               href={`mailto:${email}`}
               style={{
-                color: textColor,
-                marginLeft: `${textRightSpace}px`,
-                fontSize: `${fontSize}px`,
+                position: 'relative',
+                color: emailSettings.color,
+                fontSize: `${emailSettings.fontSize}px`,
+                fontWeight: emailSettings.bold,
+                textDecoration: emailSettings.underline ? 'underline' : 'none',
+                top: `${emailSettings.top}px`,
+                left: `${emailSettings.left}px`,
               }}
             >
               {email}
@@ -98,15 +112,20 @@ const SignaturePreview = () => {
           </div>
         )}
         {website && (
-          <div
-            style={{
-              margin: `${textTopSpaces}px ${textRightSpace}px ${textTopSpaces}px ${textLeftSpace}px`,
-              fontSize: `${fontSize}px`,
-            }}
-          >
+          <div>
             <a
               href={website}
-              style={{ color: textColor, marginLeft: `${textRightSpace}px` }}
+              style={{
+                position: 'relative',
+                color: websiteSettings.color,
+                fontSize: `${websiteSettings.fontSize}px`,
+                fontWeight: websiteSettings.bold,
+                textDecoration: websiteSettings.underline
+                  ? 'underline'
+                  : 'none',
+                top: `${websiteSettings.top}px`,
+                left: `${websiteSettings.right}px`,
+              }}
             >
               {website}
             </a>

@@ -1,30 +1,65 @@
 import { createContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 export const GlobalContext = createContext();
 
 const GlobalProvider = ({ children }) => {
-
   const [logoUrl, setLogoUrl] = useState('');
   const [logoWidth, setLogoWidth] = useState(50);
   const [name, setName] = useState('');
+  const [nameSettings, setNameSettings] = useState({
+    fontSize: 18,
+    left: 0,
+    top: 0,
+    color: '#000000',
+    bold: '400',
+    open: false,
+  });
   const [position, setPosition] = useState('');
+  const [positionSettings, setPositionSettings] = useState({
+    fontSize: 16,
+    left: 0,
+    top: 0,
+    color: '#000000',
+    bold: '400',
+    open: false,
+  });
   const [phone, setPhone] = useState('');
-  const [phoneIconUrl, setPhoneIconUrl] = useState('');
-  const [phoneIconWidth, setPhoneIconWidth] = useState(50);
+  const [phoneSettings, setPhoneSettings] = useState({
+    fontSize: 14,
+    left: 0,
+    top: 0,
+    color: '#000000',
+    bold: '400',
+    iconUrl: null,
+    iconWidth: 15,
+    iconLeftSpace: 0,
+    open: false,
+  });
   const [email, setEmail] = useState('');
-  const [emailIconUrl, setEmailIconUrl] = useState('');
-  const [emailIconWidth, setEmailIconWidth] = useState(50);
+  const [emailSettings, setEmailSettings] = useState({
+    fontSize: 14,
+    left: 0,
+    top: 0,
+    color: '#000000',
+    bold: '400',
+    iconUrl: null,
+    iconWidth: 15,
+    iconLeftSpace: 0,
+    open: false,
+  });
   const [website, setWebsite] = useState('');
+  const [websiteSettings, setWebsiteSettings] = useState({
+    fontSize: 14,
+    left: 0,
+    top: 0,
+    color: '#000000',
+    bold: '400',
+    underlined: true,
+    open: false,
+  });
   const [socialMedia, setSocialMedia] = useState([
     { iconUrl: '', url: '', width: 50 },
   ]);
-  const [textColor, setTextColor] = useState('#000000');
-  const [bold, setBold] = useState(false);
-  const [fontSize, setFontSize] = useState(14);
-  const [textTopSpaces, setTextTopSpaces] = useState(20);
-  const [textLeftSpace, setTextLeftSpace] = useState(10);
-  const [textRightSpace, setTextRightSpace] = useState(10);
 
   const handleSocialMediaChange = (index, field, value) => {
     const updatedSocialMedia = socialMedia.map((media, i) =>
@@ -43,50 +78,40 @@ const GlobalProvider = ({ children }) => {
       return false;
     }
     return true;
-  }
+  };
 
   return (
     <GlobalContext.Provider
       value={{
         logoUrl,
-        setLogoUrl,
         logoWidth,
-        setLogoWidth,
         name,
-        setName,
         position,
-        setPosition,
         phone,
-        setPhone,
-        phoneIconUrl,
-        setPhoneIconUrl,
-        phoneIconWidth,
-        setPhoneIconWidth,
         email,
-        setEmail,
-        emailIconUrl,
-        setEmailIconUrl,
-        emailIconWidth,
-        setEmailIconWidth,
         website,
-        setWebsite,
         socialMedia,
+        phoneSettings,
+        emailSettings,
+        websiteSettings,
+        nameSettings,
+        positionSettings,
         setSocialMedia,
         handleSocialMediaChange,
         addSocialMedia,
-        textColor,
-        setTextColor,
-        bold,
-        setBold,
-        fontSize,
-        setFontSize,
-        textTopSpaces,
-        setTextTopSpaces,
-        textLeftSpace,
-        setTextLeftSpace,
-        textRightSpace,
-        setTextRightSpace,
-        checkIfUserIsAuthenticated
+        checkIfUserIsAuthenticated,
+        setNameSettings,
+        setPositionSettings,
+        setPhoneSettings,
+        setEmailSettings,
+        setWebsiteSettings,
+        setLogoUrl,
+        setLogoWidth,
+        setName,
+        setPosition,
+        setPhone,
+        setEmail,
+        setWebsite,
       }}
     >
       {children}
