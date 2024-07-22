@@ -1,18 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Login = () => {
   const [isAuth, setIsAuth] = useState(false);
-  const navigate = useNavigate();
   const userEmailRef = useRef();
   const userPasswordRef = useRef();
 
   useEffect(() => {
     if (isAuth) {
-      navigate('/');
+      window.location.href = '/';
     }
-  }, [isAuth, navigate]);
+  }, [isAuth]);
 
   const loginUser = async (e) => {
     e.preventDefault();
