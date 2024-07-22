@@ -1,8 +1,10 @@
 import { createContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const GlobalContext = createContext();
 
 const GlobalProvider = ({ children }) => {
+
   const [logoUrl, setLogoUrl] = useState('');
   const [logoWidth, setLogoWidth] = useState(50);
   const [name, setName] = useState('');
@@ -34,6 +36,14 @@ const GlobalProvider = ({ children }) => {
   const addSocialMedia = () => {
     setSocialMedia([...socialMedia, { iconUrl: '', url: '', width: 50 }]);
   };
+
+  const checkIfUserIsAuthenticated = () => {
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+      return false;
+    }
+    return true;
+  }
 
   return (
     <GlobalContext.Provider
@@ -76,6 +86,7 @@ const GlobalProvider = ({ children }) => {
         setTextLeftSpace,
         textRightSpace,
         setTextRightSpace,
+        checkIfUserIsAuthenticated
       }}
     >
       {children}
