@@ -8,12 +8,11 @@ import IconWidth from './IconWidth';
 import LeftPosition from './LeftPosition';
 import TopPosition from './TopPosition';
 import IconLeftSpace from './IconLeftSpace';
+import IconTopSpace from './IconTopSpace';
 import { Options } from '../../styled/Input.styled';
 
 const OptionsBox = ({
   change,
-  exitBox,
-  font_size_value,
   onChangeFontSize,
   changeBoldValue,
   onChangeUnderline,
@@ -21,29 +20,44 @@ const OptionsBox = ({
   showUnderline,
   showIconURL,
   showIconWidth,
+  showFontSize,
   onChangeLeftPossition,
   onChangeIconURL,
   onChangeIconWidth,
   showIconLeftSpace,
   onChangeIconLeftSpace,
+  showFontColor,
+  showFontBold,
+  showLeftPossition,
+  showTopPossition,
+  leftValue,
+  topValue,
+  fontValue,
+  iconLeftSpaceValue,
+  iconWidthValue,
+  iconURLvalue,
+  onChangeIconTopSpace,
+  showIconTopSpace,
+  iconTopValue
 }) => {
   return (
     <Options>
-      <FontSize
+      {showFontSize && <FontSize
         font_name="Font Size"
-        font_size_value={font_size_value}
+        fontValue={fontValue}
         onChangeFontSize={onChangeFontSize}
-      />
-      <Color change={change} />
-      <Bold changeBoldValue={changeBoldValue} />
+      />}
+      {showFontColor && <Color change={change} />}
+      {showFontBold && <Bold changeBoldValue={changeBoldValue} />}
       {showUnderline && <Underline onChangeUnderline={onChangeUnderline} />}
-      {showIconURL && <IconURL onChangeIconURL={onChangeIconURL} />}
-      {showIconWidth && <IconWidth onChangeIconWidth={onChangeIconWidth} />}
+      {showIconURL && <IconURL onChangeIconURL={onChangeIconURL} iconURLvalue={iconURLvalue} />}
+      {showIconWidth && <IconWidth onChangeIconWidth={onChangeIconWidth} iconWidthValue={iconWidthValue} />}
+      {showIconTopSpace && <IconTopSpace onChangeIconTopSpace={onChangeIconTopSpace} iconTopValue={iconTopValue} />}
       {showIconLeftSpace && (
-        <IconLeftSpace onChangeIconLeftSpace={onChangeIconLeftSpace} />
+        <IconLeftSpace onChangeIconLeftSpace={onChangeIconLeftSpace} iconLeftSpaceValue={iconLeftSpaceValue} />
       )}
-      <LeftPosition onChangeLeftPossition={onChangeLeftPossition} />
-      <TopPosition onChangeTopPossition={onChangeTopPossition} />
+      {showLeftPossition && <LeftPosition onChangeLeftPossition={onChangeLeftPossition} leftValue={leftValue} />}
+      {showTopPossition && <TopPosition onChangeTopPossition={onChangeTopPossition} topValue={topValue} />}
     </Options>
   );
 };

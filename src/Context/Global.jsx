@@ -4,7 +4,12 @@ export const GlobalContext = createContext();
 
 const GlobalProvider = ({ children }) => {
   const [logoUrl, setLogoUrl] = useState('');
-  const [logoWidth, setLogoWidth] = useState(50);
+  const [logoSettings, setLogoSettings] = useState({
+    width: 50,
+    top: 0,
+    left: 0,
+    open: false,
+  });
   const [name, setName] = useState('');
   const [nameSettings, setNameSettings] = useState({
     fontSize: 18,
@@ -33,6 +38,7 @@ const GlobalProvider = ({ children }) => {
     iconUrl: null,
     iconWidth: 15,
     iconLeftSpace: 0,
+    iconTopSpace: 0,
     open: false,
   });
   const [email, setEmail] = useState('');
@@ -45,6 +51,7 @@ const GlobalProvider = ({ children }) => {
     iconUrl: null,
     iconWidth: 15,
     iconLeftSpace: 0,
+    iconTopSpace: 0,
     open: false,
   });
   const [website, setWebsite] = useState('');
@@ -58,7 +65,7 @@ const GlobalProvider = ({ children }) => {
     open: false,
   });
   const [socialMedia, setSocialMedia] = useState([
-    { iconUrl: '', url: '', width: 50 },
+    { iconUrl: '', url: '', width: 50, left: 0, top: 0 },
   ]);
 
   const handleSocialMediaChange = (index, field, value) => {
@@ -69,7 +76,7 @@ const GlobalProvider = ({ children }) => {
   };
 
   const addSocialMedia = () => {
-    setSocialMedia([...socialMedia, { iconUrl: '', url: '', width: 50 }]);
+    setSocialMedia([...socialMedia, { iconUrl: '', url: '', width: 50, left: 0, top: 0 }]);
   };
 
   const checkIfUserIsAuthenticated = () => {
@@ -83,8 +90,8 @@ const GlobalProvider = ({ children }) => {
   return (
     <GlobalContext.Provider
       value={{
+        logoSettings,
         logoUrl,
-        logoWidth,
         name,
         position,
         phone,
@@ -106,12 +113,12 @@ const GlobalProvider = ({ children }) => {
         setEmailSettings,
         setWebsiteSettings,
         setLogoUrl,
-        setLogoWidth,
         setName,
         setPosition,
         setPhone,
         setEmail,
         setWebsite,
+        setLogoSettings,
       }}
     >
       {children}

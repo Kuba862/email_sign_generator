@@ -30,7 +30,7 @@ const ContactDetails = () => {
     <div>
       <InputDiv>
         <div>
-          <InputLabel>Name: </InputLabel>
+          <InputLabel>First and last name: </InputLabel>
           <Input
             type="text"
             value={name}
@@ -38,12 +38,23 @@ const ContactDetails = () => {
           />
         </div>
         <Button
-          onClick={() => setNameSettings({ ...nameSettings, open: !nameSettings.open })}
+          onClick={() =>
+            setNameSettings({ ...nameSettings, open: !nameSettings.open })
+          }
         >
-            {!nameSettings.open ? "options" : "close"}
+          {!nameSettings.open ? 'options' : 'close'}
         </Button>
         {nameSettings.open && (
           <OptionsBox
+            showUnderline={true}
+            showFontSize={true}
+            showFontColor={true}
+            showFontBold={true}
+            showLeftPossition={true}
+            showTopPossition={true}
+            leftValue={nameSettings.left}
+            topValue={nameSettings.top}
+            fontValue={nameSettings.fontSize}
             exitBox={() => setNameSettings({ ...nameSettings, open: false })}
             change={(e) =>
               setNameSettings({ ...nameSettings, color: e.target.value })
@@ -57,7 +68,6 @@ const ContactDetails = () => {
             onChangeUnderline={(e) =>
               setNameSettings({ ...nameSettings, underline: e.target.checked })
             }
-            showUnderline={true}
             onChangeLeftPossition={(e) =>
               setNameSettings({ ...nameSettings, left: e.target.value })
             }
@@ -69,7 +79,7 @@ const ContactDetails = () => {
       </InputDiv>
       <InputDiv>
         <div>
-          <InputLabel>Position: </InputLabel>
+          <InputLabel>Your job position: </InputLabel>
           <Input
             type="text"
             value={position}
@@ -78,13 +88,25 @@ const ContactDetails = () => {
         </div>
         <Button
           onClick={() =>
-            setPositionSettings({ ...positionSettings, open: !positionSettings.open })
+            setPositionSettings({
+              ...positionSettings,
+              open: !positionSettings.open,
+            })
           }
         >
-          {!positionSettings.open ? "options" : "close"}
+          {!positionSettings.open ? 'options' : 'close'}
         </Button>
         {positionSettings.open && (
           <OptionsBox
+            showFontSize={true}
+            showFontColor={true}
+            showFontBold={true}
+            showLeftPossition={true}
+            showTopPossition={true}
+            showUnderline={true}
+            leftValue={positionSettings.left}
+            topValue={positionSettings.top}
+            fontValue={positionSettings.fontSize}
             exitBox={() =>
               setPositionSettings({ ...positionSettings, open: false })
             }
@@ -109,7 +131,6 @@ const ContactDetails = () => {
                 underline: e.target.checked,
               })
             }
-            showUnderline={true}
             onChangeLeftPossition={(e) =>
               setPositionSettings({
                 ...positionSettings,
@@ -124,7 +145,7 @@ const ContactDetails = () => {
       </InputDiv>
       <InputDiv>
         <div>
-          <InputLabel>Phone: </InputLabel>
+          <InputLabel>Phone number: </InputLabel>
           <Input
             type="text"
             value={phone}
@@ -132,12 +153,31 @@ const ContactDetails = () => {
           />
         </div>
         <Button
-          onClick={() => setPhoneSettings({ ...phoneSettings, open: !phoneSettings.open })}
+          onClick={() =>
+            setPhoneSettings({ ...phoneSettings, open: !phoneSettings.open })
+          }
         >
-          {!phoneSettings.open ? "options" : "close"}
+          {!phoneSettings.open ? 'options' : 'close'}
         </Button>
         {phoneSettings.open && (
           <OptionsBox
+            showFontSize={true}
+            showFontColor={true}
+            showFontBold={true}
+            showLeftPossition={true}
+            showTopPossition={true}
+            showUnderline={true}
+            showIconURL={true}
+            showIconWidth={true}
+            showIconLeftSpace={true}
+            showIconTopSpace={true}
+            leftValue={phoneSettings.left}
+            topValue={phoneSettings.top}
+            fontValue={phoneSettings.fontSize}
+            iconWidthValue={phoneSettings.iconWidth}
+            iconLeftSpaceValue={phoneSettings.iconLeftSpace}
+            iconTopValue={phoneSettings.iconTopSpace}
+            iconURLvalue={phoneSettings.iconUrl}
             exitBox={() => setPhoneSettings({ ...phoneSettings, open: false })}
             change={(e) =>
               setPhoneSettings({ ...phoneSettings, color: e.target.value })
@@ -154,10 +194,6 @@ const ContactDetails = () => {
                 underline: e.target.checked,
               })
             }
-            showUnderline={true}
-            showIconURL={true}
-            showIconWidth={true}
-            showIconLeftSpace={true}
             onChangeLeftPossition={(e) =>
               setPhoneSettings({ ...phoneSettings, left: e.target.value })
             }
@@ -176,12 +212,18 @@ const ContactDetails = () => {
                 iconLeftSpace: e.target.value,
               })
             }
+            onChangeIconTopSpace={(e) =>
+              setPhoneSettings({
+                ...phoneSettings,
+                iconTopSpace: e.target.value,
+              })
+            }
           />
         )}
       </InputDiv>
       <InputDiv>
         <div>
-          <InputLabel>Email: </InputLabel>
+          <InputLabel>E-mail address: </InputLabel>
           <Input
             type="text"
             value={email}
@@ -189,12 +231,31 @@ const ContactDetails = () => {
           />
         </div>
         <Button
-          onClick={() => setEmailSettings({ ...emailSettings, open: !emailSettings.open })}
+          onClick={() =>
+            setEmailSettings({ ...emailSettings, open: !emailSettings.open })
+          }
         >
-          {!emailSettings.open ? "options" : "close"}
+          {!emailSettings.open ? 'options' : 'close'}
         </Button>
         {emailSettings.open && (
           <OptionsBox
+            showFontSize={true}
+            showFontColor={true}
+            showFontBold={true}
+            showLeftPossition={true}
+            showTopPossition={true}
+            showIconURL={true}
+            showIconWidth={true}
+            showIconLeftSpace={true}
+            showUnderline={true}
+            showIconTopSpace={true}
+            iconURLvalue={emailSettings.iconUrl}
+            leftValue={emailSettings.left}
+            topValue={emailSettings.top}
+            fontValue={emailSettings.fontSize}
+            iconWidthValue={emailSettings.iconWidth}
+            iconLeftSpaceValue={emailSettings.iconLeftSpace}
+            iconTopValue={emailSettings.iconTopSpace}
             exitBox={() => setEmailSettings({ ...emailSettings, open: false })}
             change={(e) =>
               setEmailSettings({ ...emailSettings, color: e.target.value })
@@ -211,10 +272,6 @@ const ContactDetails = () => {
                 underline: e.target.checked,
               })
             }
-            showUnderline={true}
-            showIconURL={true}
-            showIconWidth={true}
-            showIconLeftSpace={true}
             onChangeLeftPossition={(e) =>
               setEmailSettings({ ...emailSettings, left: e.target.value })
             }
@@ -233,12 +290,18 @@ const ContactDetails = () => {
                 iconLeftSpace: e.target.value,
               })
             }
+            onChangeIconTopSpace={(e) =>
+              setPhoneSettings({
+                ...phoneSettings,
+                iconTopSpace: e.target.value,
+              })
+            }
           />
         )}
       </InputDiv>
       <InputDiv>
         <div>
-          <InputLabel>Website: </InputLabel>
+          <InputLabel>Website URL: </InputLabel>
           <Input
             type="text"
             value={website}
@@ -246,12 +309,25 @@ const ContactDetails = () => {
           />
         </div>
         <Button
-          onClick={() => setWebsiteSettings({ ...websiteSettings, open: !websiteSettings.open })}
+          onClick={() =>
+            setWebsiteSettings({
+              ...websiteSettings,
+              open: !websiteSettings.open,
+            })
+          }
         >
-            {!websiteSettings.open ? "options" : "close"}
+          {!websiteSettings.open ? 'options' : 'close'}
         </Button>
         {websiteSettings.open && (
           <OptionsBox
+            showFontSize={true}
+            showFontColor={true}
+            showFontBold={true}
+            showLeftPossition={true}
+            showTopPossition={true}
+            leftValue={phoneSettings.left}
+            topValue={phoneSettings.top}
+            fontValue={phoneSettings.fontSize}
             exitBox={() =>
               setWebsiteSettings({ ...websiteSettings, open: false })
             }

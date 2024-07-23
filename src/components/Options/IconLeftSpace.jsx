@@ -1,12 +1,17 @@
-import React from 'react'
+import React from 'react';
 
-const IconLeftSpace = ({onChangeIconLeftSpace}) => {
+const IconLeftSpace = ({ onChangeIconLeftSpace, iconLeftSpaceValue }) => {
   return (
-    <>
-        <label htmlFor="icon_left_space">Icon Left Space</label>
-        <input type="number" name="icon_left_space" onChange={onChangeIconLeftSpace} />
-    </>
-  )
-}
+    <div>
+      <label htmlFor="icon_left_space">Icon left space</label>
+      <input
+        type="number"
+        name="icon_left_space"
+        onChange={onChangeIconLeftSpace}
+        value={iconLeftSpaceValue}
+      />
+    </div>
+  );
+};
 
-export default IconLeftSpace
+export default IconLeftSpace;

@@ -50,9 +50,10 @@ export const Button = styled.button`
   height: 30px;
   border: 1px solid black;
   border-radius: 5px;
-  padding: 5px;
   margin: 5px;
   font-size: 1em;
+  background-color: #615A6E;
+  color: #F4B973;
   cursor: pointer;
   &:focus {
     outline: none;

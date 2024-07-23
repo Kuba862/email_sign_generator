@@ -19,12 +19,18 @@ const SignaturePreview = () => {
     phoneSettings,
     emailSettings,
     websiteSettings,
+    logoSettings
   } = useContext(GlobalContext);
   return (
     <Preview>
       <div>
         {logoUrl && (
-          <img src={logoUrl} alt="Logo" style={{ width: `${logoWidth}px` }} />
+          <img src={logoUrl} alt="Logo" style={{ 
+            position: 'relative',
+            width: `${logoSettings.width}px`, 
+            top: `${logoSettings.top}px`,
+            left: `${logoSettings.left}px`
+          }} />
         )}
         <p
           style={{
@@ -35,7 +41,7 @@ const SignaturePreview = () => {
             fontWeight: nameSettings.bold,
             textDecoration: nameSettings.underline ? 'underline' : 'none',
             top: `${nameSettings.top}px`,
-            left: `${nameSettings.right}px`,
+            left: `${nameSettings.left}px`,
           }}
         >
           {name}
@@ -64,6 +70,7 @@ const SignaturePreview = () => {
                   position: 'relative',
                   width: `${phoneSettings.iconWidth}px`,
                   left: `${phoneSettings.iconLeftSpace}px`,
+                  top: `${phoneSettings.iconTopSpace}px`,
                 }}
               />
             )}{' '}
@@ -92,6 +99,7 @@ const SignaturePreview = () => {
                   position: 'relative',
                   width: `${emailSettings.iconWidth}px`,
                   left: `${emailSettings.iconLeftSpace}px`,
+                  top: `${emailSettings.iconTopSpace}px`,
                 }}
               />
             )}{' '}
@@ -140,13 +148,15 @@ const SignaturePreview = () => {
                   margin: `${textTopSpaces}px 10px ${textTopSpaces}px 0`,
                 }}
               >
-                <a href={social.url}>
+                <a href={social.url} target='_blank' rel="noopener">
                   <img
                     src={social.iconUrl}
                     alt="Social Media"
                     style={{
+                      position: 'relative',
                       width: `${social.iconWidth}px`,
-                      marginLeft: `${textRightSpace}px`,
+                      left: `${social.left}px`,
+                      top: `${social.top}px`,
                     }}
                   />
                 </a>
