@@ -12,7 +12,7 @@ const RegisterForm = () => {
   const registerUser = async (e) => {
     e.preventDefault(); 
     try {
-        const res = await axios.post('http://localhost:3005/api/auth/register', {
+        const res = await axios.post((process.env.PORT || `${process.env.REACT_APP_PRODUCTION}/register`), {
             first_name: userFirstNameRef.current.value,
             last_name: userLastNameRef.current.value,
             email: userEmailRef.current.value,
